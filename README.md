@@ -1,8 +1,6 @@
 # DataAnalysisAssignment
 Home assignment for Data Analyst role in the Transaction Monitoring unit of Nordea
 
-# Data Analysis Assignment
-
 ## Objective:
 The goal of this assignment is to assess your proficiency in data analysis using Python and Jupyter Notebooks. Follow the instructions below to complete the tasks.
 
