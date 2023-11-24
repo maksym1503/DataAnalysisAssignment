@@ -1,7 +1,6 @@
-import tkinter as tk
-from tkinter import ttk
-
-# Your existing code...
+# Your existing code for left_frame...
+left_frame = tk.Frame(tab1)
+left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=3, pady=3)
 
 # Create a canvas in the left frame
 canvas = tk.Canvas(left_frame)
@@ -34,15 +33,5 @@ export_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
 clear_button = tk.Button(left_frame, text='Clear Filters', command=clear_filters)
 clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
 
-# Your existing code for result_text and summary_label in the right frame
-result_text = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
-result_text.pack(fill=tk.BOTH, expand=True)
-
-summary_label = tk.Label(right_frame, text='', wraplength=300)
-summary_label.pack()
-
-# Bind the canvas to configure the scroll region
-canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-
-# Your existing code for the main loop
+# Your existing code for the main loop...
 root.mainloop()
