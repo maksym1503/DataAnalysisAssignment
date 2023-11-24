@@ -1,16 +1,33 @@
-# Create a Scrollbar
-scrollbar = tk.Scrollbar(left_frame)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+root = tk.Tk()
+root.title('Scenarios Mosaic')
+
+# Creation of tabs
+tabControl = ttk.Notebook(root)
+tab1 = ttk.Frame(tabControl)
+tab2 = ttk.Frame(tabControl)
+
+# Configuration of tabs
+tabControl.add(tab1, text='Scenario groups')
+tabControl.add(tab2, text='Scenario datalabels')
+tabControl.pack(expand=1, fill="both")
+
+root.geometry('1100x700')
+
+# Create left and right frames for both tabs
+left_frame = tk.Frame(tab1)
+left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=3, pady=3)
 
 # Create a Listbox with the Scrollbar
-listbox = tk.Listbox(left_frame, yscrollcommand=scrollbar.set, selectmode=tk.MULTIPLE)
+listbox = tk.Listbox(left_frame, selectmode=tk.MULTIPLE)
 listbox.pack(fill=tk.BOTH, expand=True)
 
-# Configure the Scrollbar to control the Listbox
-scrollbar.config(command=listbox.yview)
+# Create a Scrollbar and associate it with the Listbox
+scrollbar = tk.Scrollbar(left_frame, command=listbox.yview)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+listbox.config(yscrollcommand=scrollbar.set)
 
-# Update your existing listbox references
-Listbox.append(listbox)
+# Update your existing Listbox references
+Listbox = listbox
 
 # Add filter blocks to the left frame and filtering out Active status column
 for column in data2.columns:
@@ -28,10 +45,11 @@ export_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
 clear_button = tk.Button(left_frame, text='Clear Filters', command=clear_filters)
 clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
 
-# The rest of your code remains unchanged
+# Display filtered data result
 result_text = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
 result_text.pack(fill=tk.BOTH, expand=True)
 
+# Summary label
 summary_label = tk.Label(right_frame, text='', wraplength=300)
 summary_label.pack()
 
