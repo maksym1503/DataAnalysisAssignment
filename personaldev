@@ -1,18 +1,14 @@
-# Create a canvas in the right_frame
-canvas = tk.Canvas(right_frame)
-canvas.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+# Create a vertical scrollbar for the Listbox
+listbox_scrollbar = ttk.Scrollbar(left_frame, orient='vertical', command=Listbox.yview)
+listbox_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-# Create a frame to hold your widgets
-frame = tk.Frame(canvas)
-canvas.create_window((0, 0), window=frame, anchor=tk.NW)
+# Configure the Listbox to use the scrollbar
+Listbox.configure(yscrollcommand=listbox_scrollbar.set)
 
-# Configure the canvas to enable scrolling
-def on_configure(event):
-    canvas.configure(scrollregion=canvas.bbox('all'))
+# Display filtered data result
+result_text = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
+result_text.pack(fill=tk.BOTH, expand=True)
 
-canvas.bind('<Configure>', on_configure)
-
-# Add a vertical scrollbar to the canvas
-scrollbar = ttk.Scrollbar(right_frame, orient='vertical', command=canvas.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-canvas.configure(yscrollcommand=scrollbar.set)
+# Summary label
+summary_label = tk.Label(right_frame, text='', wraplength=300)
+summary_label.pack()
