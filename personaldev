@@ -1,0 +1,48 @@
+import tkinter as tk
+from tkinter import ttk
+
+# Your existing code...
+
+# Create a canvas in the left frame
+canvas = tk.Canvas(left_frame)
+canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+# Create a scrollbar for the canvas
+vsb = tk.Scrollbar(left_frame, orient="vertical", command=canvas.yview)
+vsb.pack(side="right", fill="y")
+
+# Configure the canvas to use the scrollbar
+canvas.configure(yscrollcommand=vsb.set)
+
+# Create a frame to contain the widgets inside the canvas
+canvas_frame = tk.Frame(canvas)
+canvas.create_window((0, 0), window=canvas_frame, anchor='nw')
+
+# Your existing code for filter blocks
+for column in data2.columns:
+    if column != 'active':
+        listbox = add_filter_block(canvas_frame, column, data2[column].unique())
+        filter_blocks.append((column, listbox))
+
+# Additional widgets in the left frame
+filter_button = tk.Button(left_frame, text='Filter Data', command=partial(display_filtered_data, data2, filter_blocks))
+filter_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+export_button = tk.Button(left_frame, text='Export Data', command=partial(export_filtered_data, data2, filter_blocks))
+export_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+clear_button = tk.Button(left_frame, text='Clear Filters', command=clear_filters)
+clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Your existing code for result_text and summary_label in the right frame
+result_text = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
+result_text.pack(fill=tk.BOTH, expand=True)
+
+summary_label = tk.Label(right_frame, text='', wraplength=300)
+summary_label.pack()
+
+# Bind the canvas to configure the scroll region
+canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+
+# Your existing code for the main loop
+root.mainloop()
