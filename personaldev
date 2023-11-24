@@ -1,3 +1,87 @@
+# PART 2: Data aggregation and interface development
+# Main application window setup
+root = tk.Tk()
+root.title('Scenarios Mosaic')
+
+# Create left and right frames for both tabs
+left_frame = tk.Frame(root)
+left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=3, pady=3)
+
+right_frame = tk.Frame(root)
+right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=3, pady=3)
+
+# Setup of an empty list to store filter blocks and Listbox
+filter_blocks = []
+Listbox = []
+
+# Add filter blocks to the left frame and filtering out Active status column
+for column in range(10):  # Placeholder for data2.columns
+    listbox = add_filter_block(left_frame, f"Column {column}", ["Value1", "Value2"])  # Placeholder for unique values
+    filter_blocks.append((f"Column {column}", listbox))
+
+# Display filtered data result
+result_text = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
+result_text.pack(fill=tk.BOTH, expand=True)
+
+# Summary label
+summary_label = tk.Label(right_frame, text='', wraplength=300)
+summary_label.pack()
+
+# Filter button for data
+filter_button = tk.Button(left_frame, text='Filter Data', command=partial(display_filtered_data, None, filter_blocks))
+filter_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Export data button
+export_button = tk.Button(left_frame, text='Export Data', command=partial(export_filtered_data, None, filter_blocks))
+export_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Clear filters button
+clear_button = tk.Button(left_frame, text='Clear Filters', command=clear_filters)
+clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Display filtered data result
+result_text = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
+result_text.pack(fill=tk.BOTH, expand=True)
+
+# Summary label
+summary_label = tk.Label(right_frame, text='', wraplength=300)
+summary_label.pack()
+
+# Ibiza
+
+# TextBox Creation
+label = tk.Label(left_frame, text="Type in a Data Label to search for")
+label.pack()
+
+inputlabel = tk.Text(left_frame, height=5, width=20)
+inputlabel.pack()
+
+show_scenario_button = tk.Button(left_frame, text='Show Scenario Data', command=lambda: retrieve_input(1))
+show_scenario_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+export_button_2 = tk.Button(left_frame, text='Export Data', command=lambda: retrieve_input(2))
+export_button_2.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+label = tk.Label(left_frame, text="Type in a Data Field to search for")
+label.pack()
+
+inputfield = tk.Text(left_frame, height=5, width=20)
+inputfield.pack(pady=10)
+
+# Export data button
+show_scenario_button = tk.Button(left_frame, text='Show Scenario Data', command=lambda: retrieve_input(3))
+show_scenario_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+export_button_2 = tk.Button(left_frame, text='Export Data', command=lambda: retrieve_input(4))
+export_button_2.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+clear_button = tk.Button(left_frame, text='Clear Scenario', command=clear_scenario_data)
+clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Label Creation
+lbl = tk.Label(left_frame, text="")
+lbl.pack()
+
 # Display filtered data result
 result_text_2 = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
 result_text_2.pack(fill=tk.BOTH, expand=True)
@@ -8,3 +92,6 @@ scrollbar.pack(side='right', fill='y')
 
 # Configure the root window to use the scrollbar
 root.configure(yscrollcommand=scrollbar.set)
+
+# Start the main event loop
+root.mainloop()
