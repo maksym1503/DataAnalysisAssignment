@@ -1,6 +1,10 @@
-# Add a vertical scrollbar to the right frame
-scrollbar = ttk.Scrollbar(left_frame, orient='vertical', command=left_frame.yview)
-scrollbar.pack(side='left', fill='y')
+# Display filtered data result
+result_text_2 = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
+result_text_2.pack(fill=tk.BOTH, expand=True)
 
-# Configure the text widget to use the scrollbar
-left_frame.config(yscrollcommand=scrollbar.set)
+# Add a vertical scrollbar to the right frame
+scrollbar = ttk.Scrollbar(root, orient='vertical', command=root.yview)
+scrollbar.pack(side='right', fill='y')
+
+# Configure the root window to use the scrollbar
+root.configure(yscrollcommand=scrollbar.set)
