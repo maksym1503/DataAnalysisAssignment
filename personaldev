@@ -11,8 +11,18 @@ def on_configure(event):
 root = tk.Tk()
 root.title('Scenarios Mosaic')
 
+# Creation of tabs
+tabControl = ttk.Notebook(root)
+tab1 = ttk.Frame(tabControl)
+tab2 = ttk.Frame(tabControl)
+
+#  Configuration of tabs
+tabControl.add(tab1, text='Scenario groups')
+tabControl.add(tab2, text='Scenario datalabels')
+tabControl.pack(expand=1, fill="both")
+
 # Create a canvas to hold the main content
-canvas = tk.Canvas(root)
+canvas = tk.Canvas(tab1)
 canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 # Add a frame inside the canvas for the left and right frames
@@ -103,7 +113,7 @@ result_text_2 = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
 result_text_2.pack(fill=tk.BOTH, expand=True)
 
 # Add a vertical scrollbar to the canvas
-scrollbar = ttk.Scrollbar(root, orient='vertical', command=canvas.yview)
+scrollbar = ttk.Scrollbar(tab1, orient='vertical', command=canvas.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 canvas.configure(yscrollcommand=scrollbar.set)
 
