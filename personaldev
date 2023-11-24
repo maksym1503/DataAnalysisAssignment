@@ -1,5 +1,4 @@
-# Your data and other code remain unchanged
-
+# Create the main Tkinter window
 root = tk.Tk()
 root.title('Scenarios Mosaic')
 
@@ -22,40 +21,58 @@ left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=3, pady=3)
 right_frame = tk.Frame(tab1)
 right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=3, pady=3)
 
-# Create a Listbox with the Scrollbar in the left frame
-listbox = tk.Listbox(left_frame, selectmode=tk.MULTIPLE)
-listbox.pack(fill=tk.BOTH, expand=True)
+left_frame_2 = tk.Frame(tab2)
+left_frame_2.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=3, pady=3)
 
-# Create a Scrollbar and associate it with the Listbox
-scrollbar = tk.Scrollbar(left_frame, command=listbox.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-listbox.config(yscrollcommand=scrollbar.set)
+right_frame_2 = tk.Frame(tab2)
+right_frame_2.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=3, pady=3)
 
-# Update your existing Listbox references
-Listbox = listbox
+# Setup of an empty list to store filter blocks and Listbox
+filter_blocks = []
 
-# Add filter blocks to the left frame and filtering out the Active status column
+# Add filter blocks to the left frame and filtering out Active status column
 for column in data2.columns:
     if column != 'active':
         listbox = add_filter_block(left_frame, column, data2[column].unique())
         filter_blocks.append((column, listbox))
 
-# The rest of your code remains unchanged
-filter_button = tk.Button(left_frame, text='Filter Data', command=partial(display_filtered_data, data2, filter_blocks))
-filter_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+# Create a Scrollbar for the left frame
+scrollbar_left = tk.Scrollbar(left_frame)
+scrollbar_left.pack(side=tk.RIGHT, fill=tk.Y)
 
-export_button = tk.Button(left_frame, text='Export Data', command=partial(export_filtered_data, data2, filter_blocks))
-export_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+# Create a Listbox for the left frame and attach the scrollbar to it
+listbox_left = tk.Listbox(left_frame, yscrollcommand=scrollbar_left.set)
+listbox_left.pack(fill=tk.BOTH, expand=True)
 
-clear_button = tk.Button(left_frame, text='Clear Filters', command=clear_filters)
-clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+# Configure the scrollbar to scroll the Listbox
+scrollbar_left.config(command=listbox_left.yview)
 
-# Display filtered data result in the right frame
+# Add filter blocks to the Listbox
+for column in data2.columns:
+    if column != 'active':
+        listbox_left.insert(tk.END, column)
+
+# Your existing filter buttons and widgets...
+
+# Display filtered data result
 result_text = tk.Text(right_frame, wrap=tk.NONE, state=tk.DISABLED)
 result_text.pack(fill=tk.BOTH, expand=True)
 
-# Summary label in the right frame
+# Summary label
 summary_label = tk.Label(right_frame, text='', wraplength=300)
 summary_label.pack()
 
+# Filter button for data
+filter_button = tk.Button(left_frame, text='Filter Data', command=partial(display_filtered_data, data2, filter_blocks))
+filter_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Export data button
+export_button = tk.Button(left_frame, text='Export Data', command=partial(export_filtered_data, data2, filter_blocks))
+export_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Clear filters button
+clear_button = tk.Button(left_frame, text='Clear Filters', command=clear_filters)
+clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Run the Tkinter event loop
 root.mainloop()
