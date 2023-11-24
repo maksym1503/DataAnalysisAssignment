@@ -1,3 +1,6 @@
+# PART 2: Data aggregation and interface development
+# Main application window setup
+
 root = tk.Tk()
 root.title('Scenarios Mosaic')
 
@@ -62,3 +65,55 @@ result_text.pack(fill=tk.BOTH, expand=True)
 # Summary label
 summary_label = tk.Label(right_frame, text='', wraplength=300)
 summary_label.pack()
+
+# Ibiza
+
+# TextBox Creation
+label = tk.Label(left_frame_2, text="Type in a Data Label to search for")
+label.pack()
+
+inputlabel = tk.Text(left_frame_2,height=5,width=20)
+inputlabel.pack()
+
+show_scenario_button = tk.Button(left_frame_2, text='Show Scenario Data', command=lambda: retrieve_input(1))
+show_scenario_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+export_button_2 = tk.Button(left_frame_2, text='Export Data', command=lambda: retrieve_input(2))
+export_button_2.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+label = tk.Label(left_frame_2, text="Type in a Data Field to search for")
+label.pack()
+
+inputfield = tk.Text(left_frame_2,height=5,width=20)
+inputfield.pack(pady=10)
+
+# Export data button
+show_scenario_button = tk.Button(left_frame_2, text='Show Scenario Data', command=lambda: retrieve_input(3))
+show_scenario_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+export_button_2 = tk.Button(left_frame_2, text='Export Data', command=lambda: retrieve_input(4))
+export_button_2.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+clear_button = tk.Button(left_frame_2, text='Clear Scenario', command=clear_scenario_data)
+clear_button.pack(ipadx=40, ipady=10, padx=10, pady=10)
+
+# Label Creation
+lbl = tk.Label(left_frame_2, text="")
+lbl.pack()
+
+# Display filtered data result
+result_text_2 = tk.Text(right_frame_2, wrap=tk.NONE, state=tk.DISABLED)
+result_text_2.pack(fill=tk.BOTH, expand=True)
+
+# Button for closing Ibiza
+exit_button = tk.Button(right_frame, text="Exit", command=quit)
+exit_button.pack(pady=20)
+
+# Button for closing Maldives
+exit_button = tk.Button(right_frame_2, text="Exit", command=quit)
+exit_button.pack(pady=20)
+
+# Start the main event loop
+root.mainloop()
+tab1.mainloop()
+tab2.mainloop()
